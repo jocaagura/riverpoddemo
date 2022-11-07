@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpoddemo/controllers/counter_controller.dart';
 
 import 'my_home_page.dart';
 
@@ -17,8 +18,9 @@ class DeletePreviousStatePage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const MyHomePage(title: 'Came from delete state page'),
+                    builder: (context) => MyHomePage(
+                        counterController: CounterController(),
+                        title: 'Came from delete state page'),
                   ));
             },
             child: const Text('Back')),

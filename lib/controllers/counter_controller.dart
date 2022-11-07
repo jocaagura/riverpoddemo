@@ -1,7 +1,7 @@
 import 'package:riverpoddemo/models/model_counter.dart';
 
 class CounterController {
-  ModelCounter _modelCounter = ModelCounter();
+  final ModelCounter _modelCounter = ModelCounter();
 
   ModelCounter get modelCounter => _modelCounter;
   void incrementCounter() {

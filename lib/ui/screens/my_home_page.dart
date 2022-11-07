@@ -2,44 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:riverpoddemo/controllers/counter_controller.dart';
 import 'package:riverpoddemo/ui/screens/delete_previous_state_page.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+class MyHomePage extends StatelessWidget {
+  const MyHomePage(
+      {super.key, required this.counterController, this.title = "No title"});
+  final CounterController counterController;
   final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final counterConltroller = CounterController();
-  late String _counter;
-  @override
-  void initState() {
-    super.initState();
-    _counter = counterConltroller.counter;
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      counterConltroller.incrementCounter();
-      _counter = counterConltroller.counter;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -86,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Text(
-              '$_counter',
+              counterController.counter,
               style: Theme.of(context).textTheme.headline4,
             ),
             GestureDetector(
@@ -102,8 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      MyHomePage(title: "I am the number $_counter"),
+                  builder: (context) => MyHomePage(
+                      counterController: counterController,
+                      title: "I am the number ${counterController.counter}"),
                 ));
               },
               child: const Text(
@@ -114,7 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          counterController.incrementCounter();
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MyHomePage(
+                counterController: counterController,
+                title: "I am the number ${counterController.counter}"),
+          ));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
