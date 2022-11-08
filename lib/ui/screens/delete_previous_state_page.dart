@@ -5,8 +5,6 @@ import 'my_home_page.dart';
 
 class DeletePreviousStatePage extends StatelessWidget {
   const DeletePreviousStatePage({Key? key}) : super(key: key);
-  // TODO: Make sure that the controller used is the same of initial myApp Controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
