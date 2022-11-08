@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpoddemo/ui/widgets/my_app_controller_widget.dart';
 
 import 'controllers/counter_controller.dart';
 import 'ui/screens/my_home_page.dart';
@@ -8,25 +9,32 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextParent) {
     final counterController = CounterController();
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return MyAppControllerWidget(
+      counterController: counterController,
+      child: Builder(
+        builder: (BuildContext context) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // Try running your application with "flutter run". You'll see the
+              // application has a blue toolbar. Then, without quitting the app, try
+              // changing the primarySwatch below to Colors.green and then invoke
+              // "hot reload" (press "r" in the console where you ran "flutter run",
+              // or simply save your changes to "hot reload" in a Flutter IDE).
+              // Notice that the counter didn't reset back to zero; the application
+              // is not restarted.
+              primarySwatch: Colors.blue,
+            ),
+            home: MyHomePage(
+                title:
+                    'Flutter Demo Home Page ${MyAppControllerWidget.of(context).counterController.counter}'),
+          );
+        },
       ),
-      home: MyHomePage(
-          counterController: counterController,
-          title: 'Flutter Demo Home Page'),
     );
   }
 }

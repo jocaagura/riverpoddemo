@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:riverpoddemo/controllers/counter_controller.dart';
 import 'package:riverpoddemo/ui/screens/delete_previous_state_page.dart';
 
+import '../widgets/my_app_controller_widget.dart';
+
 class MyHomePage extends StatelessWidget {
-  const MyHomePage(
-      {super.key, required this.counterController, this.title = "No title"});
-  final CounterController counterController;
+  const MyHomePage({super.key, this.title = "No title"});
   final String title;
 
   @override
@@ -53,7 +52,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Text(
-              counterController.counter,
+              MyAppControllerWidget.of(context).counterController.counter,
               style: Theme.of(context).textTheme.headline4,
             ),
             GestureDetector(
@@ -70,8 +69,8 @@ class MyHomePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => MyHomePage(
-                      counterController: counterController,
-                      title: "I am the number ${counterController.counter}"),
+                      title:
+                          "I am the number ${MyAppControllerWidget.of(context).counterController.counter}"),
                 ));
               },
               child: const Text(
@@ -83,12 +82,9 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          counterController.incrementCounter();
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => MyHomePage(
-                counterController: counterController,
-                title: "I am the number ${counterController.counter}"),
-          ));
+          MyAppControllerWidget.of(context)
+              .counterController
+              .incrementCounter();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
