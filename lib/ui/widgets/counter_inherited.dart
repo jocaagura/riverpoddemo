@@ -6,10 +6,10 @@ class CountState extends InheritedWidget {
 
   const CountState({
     required this.count,
-    required Widget child,
+    required super.child,
     required this.addCounter,
     super.key,
-  }) : super(child: child);
+  });
 
   static CountState of(BuildContext context) {
     final CountState? countState =
