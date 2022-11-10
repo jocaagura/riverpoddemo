@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpoddemo/ui/widgets/counter_inherited.dart';
 
 import 'controllers/counter_controller.dart';
 import 'ui/screens/my_home_page.dart';
@@ -11,20 +12,44 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final counterController = CounterController();
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: const RootWidget());
+  }
+}
+
+class RootWidget extends StatefulWidget {
+  const RootWidget({super.key});
+
+  @override
+  State<RootWidget> createState() => _RootWidgetState();
+}
+
+class _RootWidgetState extends State<RootWidget> {
+  CounterController counterController = CounterController();
+  void addCounter() {
+    setState(() {
+      counterController.incrementCounter();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CountState(
+      count: counterController.modelCounter.counter,
+      addCounter: addCounter,
+      child: MyHomePage(
           counterController: counterController,
           title: 'Flutter Demo Home Page'),
     );
