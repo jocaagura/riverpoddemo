@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 class CountState extends InheritedWidget {
   final int count;
-  final Widget child;
   final Function addCounter;
 
   const CountState({
     required this.count,
-    required this.child,
+    required Widget child,
     required this.addCounter,
     super.key,
   }) : super(child: child);
