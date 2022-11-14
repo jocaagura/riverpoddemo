@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'controllers/counter_controller.dart';
 import 'ui/screens/my_home_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -9,7 +8,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final counterController = CounterController();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -24,9 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(
-          counterController: counterController,
-          title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
