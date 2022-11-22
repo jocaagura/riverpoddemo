@@ -3,18 +3,23 @@ import 'package:riverpoddemo/interfaces/interfarces.dart';
 import '../models/model_counter.dart';
 
 class CounterController implements InterfaceController {
-  const CounterController({this.modelCounter = const ModelCounter(0)});
-  final ModelCounter modelCounter;
+  CounterController();
+  ModelCounter _modelCounter = const ModelCounter(0);
 
-  CounterController incrementCounter() {
-    final tmp = modelCounter.copyWith(modelCounter.counter + 1);
-    return CounterController(modelCounter: tmp);
+  ModelCounter get modelCounter => _modelCounter;
+  void incrementCounter() {
+    final tmp = _modelCounter.copyWith(_modelCounter.counter + 1);
+    print(_modelCounter.hashCode);
+    print(tmp.hashCode);
+    print(_modelCounter.hashCode == tmp.hashCode);
+
+    _modelCounter = tmp;
   }
 
   String get counter => modelCounter.toString();
 
   @override
-  CounterController copyWith([ModelCounter? modelCounterTmp]) {
-    return CounterController(modelCounter: modelCounterTmp ?? modelCounter);
+  InterfaceController copyWith() {
+    return this;
   }
 }
