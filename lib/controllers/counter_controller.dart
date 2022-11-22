@@ -1,17 +1,20 @@
-import 'package:riverpoddemo/models/model_counter.dart';
+import 'package:riverpoddemo/interfaces/interfarces.dart';
 
-class CounterController {
-  // static final CounterController _instance = CounterController._internal();
-  // factory CounterController() {
-  //   return _instance;
-  // }
-  // CounterController._internal();
-  final ModelCounter _modelCounter = ModelCounter();
+import '../models/model_counter.dart';
 
-  ModelCounter get modelCounter => _modelCounter;
-  void incrementCounter() {
-    _modelCounter.setCounter(modelCounter.counter + 1);
+class CounterController implements InterfaceController {
+  const CounterController({this.modelCounter = const ModelCounter(0)});
+  final ModelCounter modelCounter;
+
+  CounterController incrementCounter() {
+    final tmp = modelCounter.copyWith(modelCounter.counter + 1);
+    return CounterController(modelCounter: tmp);
   }
 
   String get counter => modelCounter.toString();
+
+  @override
+  CounterController copyWith([ModelCounter? modelCounterTmp]) {
+    return CounterController(modelCounter: modelCounterTmp ?? modelCounter);
+  }
 }
