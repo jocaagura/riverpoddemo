@@ -18,5 +18,7 @@ class CounterControllerWidget extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(covariant CounterControllerWidget oldWidget) => true;
+  bool updateShouldNotify(covariant CounterControllerWidget oldWidget) =>
+      oldWidget.counterController.modelCounter !=
+      counterController.modelCounter;
 }

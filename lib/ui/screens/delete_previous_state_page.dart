@@ -16,8 +16,7 @@ class DeletePreviousStatePage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        MyHomePage(title: 'Came from delete state page'),
+                    builder: (context) => const MyHomePage(),
                   ));
             },
             child: const Text('Back')),
