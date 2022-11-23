@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpoddemo/main.dart';
 
-import 'counter_controller_widget.dart';
-
-class TextButtonWidget extends StatelessWidget {
+class TextButtonWidget extends ConsumerWidget {
   const TextButtonWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        CounterControllerWidget.of(context)
-            .counterController
-            .incrementCounter();
+        ref.read(helloWorldProvider).incrementCounter();
       },
       child: const Text(
         'You have pushed the button this many times:',

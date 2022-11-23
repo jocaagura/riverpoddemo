@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:riverpoddemo/models/model_counter.dart';
-import 'package:riverpoddemo/ui/widgets/counter_controller_widget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DisplayCounterUnitWidget extends StatelessWidget {
+import '../../main.dart';
+import '../../models/model_counter.dart';
+
+class DisplayCounterUnitWidget extends ConsumerWidget {
   const DisplayCounterUnitWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // String value = ref.watch(helloWorldProvider).counter;
+    // return Text(
+    //   value,
+    //   style: Theme.of(context).textTheme.headline4,
+    // );
+    final counterController = ref.watch(helloWorldProvider);
     return StreamBuilder<ModelCounter>(
-        stream: CounterControllerWidget.of(context)
-            .counterController
-            .streamModelCounter,
+        stream: counterController.streamModelCounter,
         builder: (context, snapshot) {
-          final String counterNumber =
-              CounterControllerWidget.of(context).counterController.counter;
+          final String counterNumber = counterController.counter;
           return Text(
             '$counterNumber - ${snapshot.data}',
             style: Theme.of(context).textTheme.headline4,
